@@ -1,0 +1,7 @@
+
+# Compiled Static libraries
+!*.lib
+
+# Configuration Directories
+![Dd]ebug/
+![Rr]elease/
