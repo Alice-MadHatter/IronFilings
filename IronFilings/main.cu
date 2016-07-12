@@ -11,6 +11,8 @@
 #include <glfw\glfw3.h>
 #include <glm\glm.hpp>
 
+#include "application.cuh"
+
 using namespace std;
 using namespace thrust;
 using namespace glm;
@@ -68,48 +70,8 @@ int main(int argc, char** argv)
 
 	/************************************* GLFW Test Begin *************************************/
 
-	// initialize GLFW
-	if (!glfwInit())
-		return -1;
-
-	// create window
-	GLFWwindow* window = glfwCreateWindow(256, 256, "Hello IronFilings !", NULL, NULL);
-	if (!window)
-	{
-		glfwTerminate();
-		return -1;
-	}
-
-	// make context current
-	glfwMakeContextCurrent(window);
-
-	// main loop
-	while (!glfwWindowShouldClose(window)) // until window should close
-	{
-		// draw triangle
-		int width, height;
-		glfwGetFramebufferSize(window, &width, &height);
-		glViewport(0, 0, width, height);
-		glClear(GL_COLOR_BUFFER_BIT);
-		glLoadIdentity();
-		glTranslatef(0.0f, 0.0f, 0.0f);
-		glBegin(GL_TRIANGLES);
-		{
-			glColor3f(1.0f, 0.0f, 0.0f); glVertex3f(0.0f, 1.0f, 0.0f);
-			glColor3f(0.0f, 1.0f, 0.0f); glVertex3f(-1.0f, -1.0f, 0.0f);
-			glColor3f(0.0f, 0.0f, 1.0f); glVertex3f(1.0f, -1.0f, 0.0f);
-		}
-		glEnd();
-
-		// swap buffers
-		glfwSwapBuffers(window);
-
-		// poll events
-		glfwPollEvents();
-	}
-
-	// terminate GLFW
-	glfwTerminate();
+	Application app("Hello Iron Filings!", 1024, 768, false);
+	app.run();
 
 	/************************************* GLFW Test End *************************************/
 
