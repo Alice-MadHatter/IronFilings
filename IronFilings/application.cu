@@ -43,6 +43,9 @@ Application::Application(string title, int width, int height, bool fullscreen)
 
 	// make context current
 	glfwMakeContextCurrent(window);
+
+	// turn off vsync
+	glfwSwapInterval(0);
 }
 
 Application::~Application(void)
@@ -67,6 +70,7 @@ void Application::run(void)
 
 	// main loop
 	double time = glfwGetTime();
+	int sec = 0;
 	while (!glfwWindowShouldClose(window))
 	{
 		// update viewport
@@ -76,6 +80,15 @@ void Application::run(void)
 		// calculate delta time
 		float delta = (float)(glfwGetTime() - time);
 		time = glfwGetTime();
+
+		// show FPS in title bar
+		if ((int)time > sec)
+		{
+			sec = (int)time;
+			ostringstream oss;
+			oss << title << " (FPS: " << (int)(1.0f / delta) << ")";
+			glfwSetWindowTitle(window, oss.str().c_str());
+		}
 
 		// update process
 		update(delta);
