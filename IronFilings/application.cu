@@ -1,3 +1,4 @@
+
 #include "application.cuh"
 
 GLFWwindow* Application::window = NULL;
